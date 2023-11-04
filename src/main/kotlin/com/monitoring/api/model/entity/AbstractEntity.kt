@@ -7,7 +7,8 @@ import java.time.LocalDateTime
 @MappedSuperclass
 abstract class AbstractEntity : Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen")
+    @SequenceGenerator(name = "gen", sequenceName = "seq", allocationSize = 1)
     var id: Long = 0
         private set
 
