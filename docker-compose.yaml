@@ -1,0 +1,25 @@
+services:
+  db:
+    ports:
+      - 5432:5432
+    container_name: postgresql_container
+    image: postgres
+    environment:
+      - POSTGRES_DB=MYDB2
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=admin
+    volumes:
+      - /home/zair/postgres_datapart/:/var/lib/postgresql/data
+    restart: always
+  backend:
+    build: .
+    container_name: api
+    ports:
+      - 8080:8080
+    environment:
+      db-url: 'jdbc:postgres://db:5432/MYDB2'
+      db-username: 'admin'
+      db-password: 'admin'
+    depends_on:
+      - db
+    restart: always
