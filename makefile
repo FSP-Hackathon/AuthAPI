@@ -5,5 +5,5 @@ run: terminate
 
 terminate:
 	docker compose -f ./docker-compose.yaml down
-	docker image rm -f authapi_backend
+	docker image rm -f authapi-backend
 	
