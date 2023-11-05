@@ -1,5 +1,6 @@
 package com.monitoring.api.service.implementation
 
+import com.monitoring.api.model.dto.DatabasesResponse
 import com.monitoring.api.model.entity.User
 import com.monitoring.api.model.repository.UserRepo
 import com.monitoring.api.service.UserService
@@ -34,6 +35,9 @@ class UserServiceImpl(
         return userRepo.findAll()
     }
 
+    override fun getDatabases(nickname: String): DatabasesResponse? {
+        return userRepo.findByNickname(nickname)?.toDatabasesResponse()
+    }
     override fun loadUserByUsername(username: String?): UserDetails {
         TODO("Not yet implemented")
     }

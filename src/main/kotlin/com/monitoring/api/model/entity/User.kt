@@ -1,6 +1,7 @@
 package com.monitoring.api.model.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.monitoring.api.model.dto.DatabasesResponse
 import jakarta.persistence.*
 
 @Entity
@@ -10,4 +11,6 @@ class User(
     @ManyToMany(mappedBy = "users")
     @JsonIgnoreProperties("users")
     val databases: List<Database> = listOf()
-) : AbstractEntity()
+) : AbstractEntity() {
+    fun toDatabasesResponse() = DatabasesResponse(nickname, databases.map { it.name })
+}

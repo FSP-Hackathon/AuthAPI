@@ -1,5 +1,6 @@
 package com.monitoring.api.controller
 
+import com.monitoring.api.model.dto.DatabasesResponse
 import com.monitoring.api.model.entity.User
 import com.monitoring.api.service.UserService
 import org.springframework.http.ResponseEntity
@@ -32,5 +33,10 @@ class AuthController(
     @GetMapping("/user/check")
     fun checkUser(@RequestParam("nickname") nickname: String): ResponseEntity<Boolean> {
         return ResponseEntity.ok().body(userService.isUserValid(nickname))
+    }
+
+    @GetMapping("/user/databases")
+    fun getDatabases(@RequestParam("nickname") nickname: String): ResponseEntity<DatabasesResponse> {
+        return ResponseEntity.ok().body(userService.getDatabases(nickname))
     }
 }
